@@ -88,7 +88,11 @@ def _reward_cubic(
         _terminal_plot("scoring: cubic reward (raw)", points, sort=True)
 
     # ensure all values are in the range [0, 1]
+    # Append value 0 at the end
+    points = np.append(points, 0)
     points = minmax_scale(points)
+    # Remove the last element (which corresponds to the 0 we just added)
+    points = points[:-1]
     logger.debug(
         f"scoring: cubic reward minmax scaled shape: {points.shape}\n array: {points}"
     )
